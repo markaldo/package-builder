@@ -2051,7 +2051,7 @@ The door need a littlebit of 'pulling' tactic to unclock it. e.t.c"></textarea>
 
             function loadLanguage(lang) {
             // Define the path to the language files
-            const langFilePath = `./locales/${lang}.json`;
+            const langFilePath = `./translations/${lang}.json`;
 
             // Fetch the selected language file
             fetch(langFilePath)
@@ -2068,7 +2068,7 @@ The door need a littlebit of 'pulling' tactic to unclock it. e.t.c"></textarea>
                 .catch(error => {
                     console.error("Error loading language file:", error);
                     // Fallback to English if the selected language file fails to load
-                    fetch('./locales/en.json')
+                    fetch('./translations/en.json')
                         .then(response => response.json())
                         .then(translations => {
                             applyTranslations(translations);
