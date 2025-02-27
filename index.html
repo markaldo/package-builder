@@ -6,11 +6,12 @@
     <title>SwiftScrub Co. - Cleaning Order Form</title>
     <style>
         :root {
-            --primary-color: #1ABCFE; /* A blue color */
-            --secondary-color: #FF5100; /* A orange color */
-            --accent-color: #F0F0F0; /* A grey color */
-            --background-color: #ccc; /* A light grey background */
-            --text-color: #404040; /* A dark grey text color */
+            --primary-color: #00DACB; 
+            --secondary-color: #FF5100;
+            --shade-color: #009F94;
+            --accent-color: #F0F0F0; 
+            --background-color: #ccc; 
+            --text-color: #404040; 
         }
         body {
           font-family: 'Lato', 'Lora', 'Arial', sans-serif;
@@ -48,81 +49,111 @@
         }
         section {
             margin-bottom: 20px;
-            padding: 10px;
+            padding: 10px 20px;
             border: 1px solid var(--background-color);
             border-radius: 20px;
             background-color: #fff;
             text-align: center;
-            margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         h1 {
             text-align: center;
         }
         h2 {
-          padding: 0px 0px 0px 15px;
-          color: #C0C0C0;
+          color: var(--primary-color);
+          margin: 15px 0px 25px 0px;
         }
-        h3 {
-          margin-top: 20px;
+        h3, h4 {
+            color: var(--primary-color);
+            margin: 5px 0px;
+        }
+        h5 {
+            color: var(--secondary-color);
         }
         input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="date"], input[type="time"], select, textarea {
           border: 1px solid var(--background-color);
           border-radius: 5px;
           text-align: center;
           width: 100%;
+          margin-bottom: 15px;
+        }
+        textarea {
+            width: 95%; 
+            height: 70px; 
+            border: 1px solid var(--background-color);
+            text-align: left;
+            padding: 1% 2.5%;
+        }
+
+        /* Top Header */
+        #top-header {
+            margin-top: 0px;
+        }
+        /* Language Switcher */
+        #language-switcher {
+            float: right;
+            height: 40px;
+            width: 80px;
         }
 
         /* User Type Selection */
-        .lab {
-          display: flex;
-          justify-content: center; 
-        }
         .lab label {
-            margin-left: 10px;
-            margin-right: 10px;
+            margin-left: 7.5%;
+            margin-right: 7.5%;
+        }
+        .lab2 {
+            justify-content: space-between;
         }
 
         /* Apartment */
-        .apartment {
+        .components {
+            margin: 0px;
+            justify-content: space-evenly;
+        }
+        .components div {
             align-items: center;
+            justify-content: space-between;
+            width: 300px;
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .apartment div {
-            display: flex;
-            align-items: center; 
-            justify-content: center; 
-        }
-        #apt label {
-          margin: 0 15px;
-        }
-        #apt-1 {
-          flex: 1;
-        }
-        #apt-2 {
-          flex: 1;
-        }
-        .plus, .minus {
-            border: none;
-            width: 34px;
-            height: 34px;
+        .components input {
+            width: 50px;
+            text-align: center;
             font-weight: bold;
-            font-size: xx-large;
-            color: white;
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 5px;
+            margin: 0 10px;
+        }
+        .components button {
             background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            width: 45px;
+            height: fit-content;
+            padding: 5px 10px;
+            font-size: 20px;
+            font-weight: bolder;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .minus {
-            border-radius: 10px 0px 0px 10px;
+        .components button:hover {
+            background-color: #1496c7;
         }
-        .plus {
-            border-radius: 0px 10px 10px 0px;
+        .components button:active {
+            background-color: #0d7ba6;
         }
-        #rooms, #bathrooms {
-          width: 40px;
-          height: 30px;
-          border-radius: 0px;
+        #in-rooms {
+            flex: 1;
+            justify-content: space-between;
         }
-        #extra-rooms {
-          justify-content: space-between;
+        #out-rooms {
+            flex: 2;
+            justify-content: space-between;
         }
         #balconySize,#garageSize, #basementSize {
           width: 74px;
@@ -131,55 +162,17 @@
           display: grid;                  
           grid-template-columns: repeat(2, 1fr); 
           gap: 10px;   
-          margin: 0px;                    
-        }
-        .toggle-switch {
-          position: relative;
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-        }
-        .toggle-switch input {
-          opacity: 0;
-          width: 0;
-          height: 0;
-        }
-        .slider {
-          position: relative;
-          width: 38px;
-          height: 19px;
-          background-color: var(--background-color);
-          border-radius: 34px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-        }
-        .slider::before {
-          content: '';
-          position: absolute;
-          height: 15px;
-          width: 15px;
-          left: 2px;
-          bottom: 2px;
-          background-color: white;
-          border-radius: 50%;
-          transition: transform 0.3s ease;
-        }
-        .toggle-switch input:checked + .slider {
-          background-color: var(--primary-color);
-        }
-        .toggle-switch input:checked + .slider::before {
-          transform: translateX(20px);
+          margin: 15px 0px 0px 0px;                    
         }
 
         /* Microservices */
-        #microservices {
+        #microservices, #additionals {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
             gap: 15px;
-            justify-content: space-between;
             margin: 0px 0px 15px 0px; 
         }
-        #microservices label {
+        #microservices label, #additionals label {
             display: flex;
             align-items: center;
             padding: 10px;
@@ -188,18 +181,24 @@
             justify-content: space-between; 
             margin: 0; 
         }
-        #microservices label input {
+        #microservices label input, 
+        #additionals label input {
           margin-right: 10px; 
         }
-        #microservices label span {
-          margin-left: auto; 
-          font-weight: bold;
-          color: #007BFF;
+        #microservices label input[type="checkbox"],
+        #additionals label input[type="checkbox"] {
+            margin-right: 10px; /* Space between checkbox and first span */
         }
-
-        /* Additonals */
-        #additionals label{
-          flex: 1;
+        #microservices label span:first-of-type,
+        #additionals label span:first-of-type {
+            flex: 1; /* Take up remaining space */
+            text-align: left;
+            margin-right: 10px; /* Space between first and second span */
+         }
+        #microservices label span:last-of-type,
+        #additionals label span:last-of-type {
+            margin-left: auto; /* Push second span to the right */
+            color: var(--shade-color);
         }
 
         /* Frequency */
@@ -207,9 +206,13 @@
           font-family: 'Gill Sans';
           color:var(--secondary-color);
         }
-        #frequencyCount, #frequencyPeriod, #cleaningDate, #cleaningTime {
+        .box label {
+            margin: 5px;
+        }
+        #cleaningDate, #cleaningTime, #frequencyCount, #frequencyPeriod {
           align-items: center;
           height: 30px;
+          margin: 5px 0px;
         }
 
         /* House Details */
@@ -220,46 +223,58 @@
         }
         .address-inputs, #codes-section {
           justify-content: space-between;
-          padding-bottom: 5px;
-          margin: 0px 5px;
         }
         .address-inputs label {
-          margin-bottom: 10px;
+            text-align: left;
         }
-        .address-inputs input, #countryCode {
-          width: 55px;
-          height: 30px;
+        .address-inputs input {
+           height: 30px;
+        }
+        .address-inputs input[name="city"], 
+        .address-inputs input[name="postalCode"] {
+            width: 110px;
         }
         .address-inputs input[name="street"] {
-          width: 270px;
-          margin-left: 5px;
+            width: 320px;
         }
-        .address-inputs input[name="city"], .address-inputs input[name="postalCode"] {
-          width: 80px;
+        .address-inputs input[name="buildingNumber"],
+        .address-inputs input[name="apartmentNumber"],
+        .address-inputs input[name="postalCode"] {
+            width: 80px;
         }
         .entrance-toggle {
-          text-align: center;
-          margin: 15px 0;
+            text-align: center;
+            margin: 15px 0;
+        }
+        #entrance label {
+            flex: 1;
+        }
+        #entrance select {
+            flex: 3;
+            height: 37px;
+            margin-bottom: 0;
         }
         #codes-section label {
-          display: flex;
-          justify-content: space-between;
-          flex-direction: column;
-          text-align: left;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            text-align: left;
         }
         #codes-section input {
-          width: 120px;
-          height: 30px;
+            width: 120px;
+            height: 30px;
+        }
+        #countryCode {
+            max-width: 55px;
         }
         #personal {
-          justify-content: space-between; 
-          margin: 0px 5px;
+            justify-content: space-between; 
         }
         #personal input {
             height: 30px;
         }
         #personal input[name="email"], #personal input[name="name"]{
-          width: 270px;
+          max-width: 270px;
           height: 30px;
         } 
         #phone {
@@ -270,30 +285,28 @@
         #phone div {
             margin: 0px;
         }
+        #phone label, #personal label {
+            text-align: left;
+        }
         .textarea-container {
           text-align: left; 
           display: block;
-          margin-left: 0px;
-        }
-        .textarea-container label {
-            margin-bottom: 5px; 
-        }
-        textarea {
-            width: 100%; 
-            height: 70px; 
-            border: 1px solid var(--background-color);
-            text-align: left;
         }
         
         /* Consent */
         #consent {
           text-align: left;
-          padding-bottom: 20px;
+        }
+        #consent div {
+            justify-content: left;
+        }
+        #consent label {
+            display: inline-flex;
         }
 
         /* Submissions */
         #makeOrder {
-          width: 280px;
+          width: 320px;
           height: 40px;
           font-weight: bold;
           background-color: var(--secondary-color); 
@@ -303,18 +316,19 @@
           text-transform: uppercase;
           cursor: pointer;
           transition: background-color 0.3s ease;
+          padding: 0px 10px;
         }
         #makeOrder:disabled {
           background-color: var(--background-color); 
           cursor: not-allowed;
         }
         #makeOrder:hover:not(:disabled) {
-          background-color: #DD4600; 
+          background-color: var(--secondary-color); 
         }
 
         /* summary */
         #summary-card {
-          min-width: 220px;
+          width: 220px;
           border: 2px solid grey; 
           border-radius: 10px; 
           padding: 15px; 
@@ -396,11 +410,92 @@
             opacity: 0.5; 
             pointer-events: none; 
         }
-
+        @media (max-width: 380px) {
+            /* Microservices */
+            #microservices {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            }
+            #personal input[name="name"],
+            #personal input[name="email"] {
+                width:98%;
+            }
+        }
+        @media (max-width: 450px) {
+            body {
+                font-size: small;
+            }
+            div {
+                margin: 15px 0px;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            input, select {
+                padding: 5px 2px;
+            }
+            textarea {
+                height: 110px;
+            }
+            #language-switcher {
+                float: none;
+                flex-direction: row;
+                justify-content: right;
+                width: 100%;
+            }
+            #langSwitcher {
+                max-width: 80px;
+                margin: 0px 15px 0px 0px;
+            }
+            #dynamic-message-1 {
+                font-size: medium;
+            }
+            .components div {
+                width: 98%;
+                margin: 15px 0px;
+            }
+            .components input {
+                width: 25px;
+                padding: 5px 0px;
+                margin: 0 2px;
+            }
+            #microservices label {
+                padding: 5px 0px;
+            }
+            #additionals {
+                margin: 10px 0px;
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+            }
+            .box {
+                margin: 0;
+            }
+            #frequencyCount, #frequencyPeriod {
+                height: 42px;
+            }
+            #street input {
+                width: 92%;
+            }
+            #countryCode {
+                width: 12%;
+            }
+            .calculation-item span:last-child {
+                width: 50% !important;
+            }
+            #makeOrder {
+                width: 100%;
+            }
+        }
+        @media (min-width: 450px) and (max-width: 900px) {
+            #orders, #calculations {
+                font-size: medium;
+            }
+        }
         /* Responsive Layout - Small Screens */
-        @media (max-width: 780px) {
+        @media (max-width: 900px) {
             section {
-                display: block;
+                padding: 10px;
             }
             aside {
                 display: none; 
@@ -411,23 +506,27 @@
                 text-align: left;
                 flex-direction: column; 
             }
-            #apt .apartment div {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                align-items: center;          
-                justify-items: center;        
-                gap: 10px;  
-                max-height: 50px;           
+            .lab label, .lab2 label, #additionals label {
+                margin: 5px 0px;
             }
-            .plus, .minus {
-                width: 100%; 
-                height: 100%; 
+            .row div {
+                margin: 0;
+            }
+
+            /* Counters */
+            .components {
+                align-items: center;
+                flex-direction: column;
+            }
+            .components div {
+                flex-direction: row;
                 text-align: center;
             }
-            #rooms, #bathrooms {
-                text-align: center; 
-                margin: 2px;
-                width: 100%;
+            .components button {
+                width: 45px;
+                padding: 8px 0px;
+                font-size: 18px;
+                font-weight: bold;
             }
             
             /* Form Container */
@@ -442,20 +541,26 @@
                 max-width: 800px;
             }           
             #extra-rooms {
-                margin-top: 30px;
-                text-align: left;
+                margin-top: 15px;
             }
             #extra-rooms label {
                 flex-basis: calc(20% - 5px);
                 display: flex;
                 align-items: center;
             }
-            #extra-rooms input{
-                padding-right: 10px;
-            }
             #extra-rooms input[type='number']{
-                width: 84px;
+                width: 72px;
                 margin-left: auto;
+            }
+            #in-rooms {
+                margin: 0px 0px 10px 0px;
+            }
+            #in-rooms div {
+                margin-top: 15px;
+            }
+            #out-rooms {
+                flex-direction: column;
+                margin: 0;
             }
             #private--house {
                 display: block;
@@ -463,19 +568,12 @@
             }
             /* Labels */
             label {
-                font-size: 16px;
                 display: block;
                 margin-bottom: 5px;
             }
             /* Inputs */
-            input, select, textarea {
-                padding: 8px;
-                font-size: 16px;
-                margin-bottom: 10px;
-            }
             #street input {
-                min-width: 280px;
-                text-align: left;
+                max-width: 280px;
             }
             input[name="city"] {
                 min-width: 84px;
@@ -484,7 +582,6 @@
                 min-width: 100px; 
             }
             #codes-section label {
-                display: block;
                 min-width: 180px;
             }
             #phone {
@@ -499,23 +596,22 @@
                 margin: 0px;
             }
             #telephone {
-                width: 200px;
-            }
-            #details, #personal {
-                padding: 0;
+                max-width: 210px;
             }
             #placingOrder div {
                 align-items: center;
             }
             /* Style for summary item content */
             #summary-card {
-                margin: 0;
+                margin: 0px;
+                padding: 0% 2.5%;
                 border: none !important;
+                width: 95%;
+                background-color: var(--accent-color);
             }
             .summary-item, .calculation-item {
                 flex-direction: row;
-                margin: 0px;
-                font-size: medium;
+                padding: 0px 5px;
             }
             .summary-item span:first-child,
             .calculation-item span:first-child {
@@ -534,30 +630,24 @@
                 margin: 0px;
             }
             hr {
-                color: var(--background-color); /* Replace "red" with your desired color */
-                background-color: var(--background-color); /* For older browsers */
+                color: var(--background-color); 
+                background-color: var(--background-color); 
                 width: 100%;
-                height: 2px;          /* Adjust height for visibility */
-                border: 0;            /* Remove default border */
+                height: 2px;          
+                border: 0;           
                 margin-bottom: 20px;
             }
-            #consent label {
-                margin-bottom: 15px;
-            }
         }
-        @media (min-width: 780px) {
+        @media (min-width: 900px) {
             #small-sum {
                 display: none;
             }
         }
-        @media (max-width: 1180px) {
+        @media (max-width: 1180px) and (min-width: 900px) {
             #personal {
                 display: block;
                 text-align: left;
                 flex-direction: column; 
-            }
-            #phone {
-                margin: 15px 0px;
             }
             #phone div {
                 flex-direction: row;
@@ -568,7 +658,36 @@
                 margin: 0px;
             }
             #telephone {
-                width: 200px;
+                width: 210px;
+            }
+            /* Counters */
+            #windows {
+                align-items: center;
+                flex-direction: column;
+            }
+            #windows div {
+                flex-direction: row;
+                text-align: center;
+            }
+            #extra-rooms {
+                flex-direction: column;
+            }
+
+            #extra-rooms .row {
+                flex-direction: row;
+                justify-content: space-evenly;
+            }
+            .address-inputs input[name="city"], 
+            .address-inputs input[name="postalCode"] {
+                width: 70px;
+            }
+            .address-inputs input[name="street"] {
+                width: 250px;
+            }
+        }
+        @media (max-width: 1280px) {
+            form {
+                width: 70%;
             }
         }
         @media (min-width: 1840px) {
@@ -577,7 +696,6 @@
                 margin: 0 auto; /* Centers the body horizontally */
             }
             aside {
-                width: 270px;
                 right: calc((100vw - 1440px) / 2 - 10px);
             }
             #summary card {
@@ -587,158 +705,242 @@
     </style>
 </head>
 <body>
-    <div>
+    <!-- Language Switcher-->
+    <div id="language-switcher">
+        <select id="langSwitcher">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+            <option value="pl">Polski</option>
+        </select>
+    </div>
+
+    <!-- Header -->
+    <div id="top-header">
         <h1>SwiftScrub Co Package Builder</h1>
     </div>
+
     <!-- Loading Overlay -->
     <div id="loading-overlay">
         <div class="loader"></div>
     </div>
 
+    <!-- Main Structure -->
     <div id="main" style="display: flex;">
         <form id="cleaning-order-form">
             <!-- User Type Selection -->
             <section>
-                <h2>CLIENT</h2>
+                <h2 id="clientSectionTitle">CLIENT</h2>
                 <div class="lab">
                     <label>
                         <input type="radio" name="userType" value="individual" checked>
-                        Individual
+                        <span id="individualLabel">Individual</span>
                     </label>
                     <label>
                         <input type="radio" name="userType" value="legalEntity">
-                        Legal Entity
+                        <span id="legalEntityLabel">Legal Entity</span>
                     </label>
                 </div>
             </section>
 
             <!-- Cleaning Options -->
             <section>
-                <h2>CLEANING TYPE</h2>
+                <h2 id="serviceSectionTitle">SERVICE</h2>
                 <p><span class="dynamic-message" id="dynamic-message-0"></span></p>
-                <div class="lab">
+                <div class="lab2">
                     <label>
                         <input type="radio" name="cleaningType" value="regular" checked>
-                        Regular Cleaning
+                        <span id="regularCleaningLabel">Regular Cleaning</span>
                     </label>
                     <label>
                         <input type="radio" name="cleaningType" value="deep">
-                        Deep Cleaning
+                        <span id="deepCleaningLabel">Deep Cleaning</span>
                     </label>
                     <label>
                         <input type="radio" name="cleaningType" value="custom">
-                        Custom Cleaning
+                        <span id="customCleaningLabel">Custom Cleaning</span>
                     </label>
                     <label>
                         <input type="radio" name="cleaningType" value="postRenovation">
-                        Post-Renovation Cleaning
+                        <span id="postRenovationCleaningLabel">Post-Renovation Cleaning</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Apatment Type -->
+            <section>
+                <h2 id="housingSectionTitle">HOUSING</h2>
+                <div class="lab2">
+                    <label>
+                        <input type="radio" name="apartmentType" value="Private House">
+                        <span id="privateHouseLabel">Private House</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="apartmentType" value="Studio Apartment">
+                        <span id="studioApartmentLabel">Studio Apartment</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="apartmentType" value="Private Apartment" checked>
+                        <span id="privateApartmentLabel">Private Apartment</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="apartmentType" value="Commercial Apartment">
+                        <span id="commercialApartmentLabel">Commercial Apartment</span>
                     </label>
                 </div>
             </section>
 
             <!-- Apartment Details -->
             <section>
-              <h2>APARTMENT</h2>
-              <div id="apt">
-                <div class="apartment" id="apt-1">
-                  <label>Room(s)</label>
-                  <div>
-                      <button type="button" class="minus">-</button>
-                      <input type="number" id="rooms" name="rooms" value="1" readonly>
-                      <button type="button" class="plus">+</button>
-                  </div>
+                <h2 id="categorySectionTitle">CATEGORY</h2>
+                <div class="components" id="apt">
+                    <div id="apt-1">
+                        <button type="button" class="minus">-</button>
+                        <span id="roomsLabel">ROOMS</span>
+                        <input type="number" id="rooms" name="rooms" value="1" readonly>
+                        <button type="button" class="plus">+</button>
+                    </div>
+                    <div id="apt-2">
+                        <button type="button" class="minus">-</button>
+                        <span id="bathroomsLabel">BATHROOMS</span>
+                        <input type="number" id="bathrooms" name="bathrooms" value="1" readonly>
+                        <button type="button" class="plus">+</button>
+                    </div>               
                 </div>
-                <div class="apartment" id="apt-2">
-                  <label>Bathroom(s)</label>
-                  <div>
-                      <button type="button" class="minus">-</button>
-                      <input type="number" id="bathrooms" name="bathrooms" value="1" readonly>
-                      <button type="button" class="plus">+</button>
-                  </div>
-                </div>                
-              </div>
-              <span class="dynamic-message" id="size-message-1" style="display: none;"></span>
-              <div id="extra-rooms">
-                <div>
-                    <label>
-                        <input type="checkbox" id="kitchen" name="kitchen" checked>
-                        Kitchen
-                    </label>
-                </div>
-                <div>
-                  <label>
-                    <input type="checkbox" id="corridor" name="corridor" checked>
-                        Corridors
-                  </label>
-                </div>
-                <span class="dynamic-message" id="size-message-2" style="display: none;"></span>
-                <div>
-                    <label>
-                        <input type="checkbox" id="balcony" name="balcony">
-                        Balcony 
-                        <input type="number" id="balconySize" name="balconySize" placeholder="Size (m²)">
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        <input type="checkbox" id="garage" name="garage">
-                        Garage 
-                        <input type="number" id="garageSize" name="garageSize" placeholder="Size (m²)">
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        <input type="checkbox" id="basement" name="basement">
-                        Basement 
-                        <input type="number" id="basementSize" name="basementSize" placeholder="Size (m²)">
-                    </label>
-                </div>
-              </div>                   
-              <div id="private--house">
-                <label class="toggle-switch">
-                    <span>Private House</span>
-                    <input type="checkbox" id="privateHouse" name="privateHouse">
-                    <span class="slider"></span>
-                </label>
-              </div>
+                <span class="dynamic-message" id="size-message-1" style="display: none;"></span>
+                <div id="extra-rooms">
+                    <div class="row" id="in-rooms">
+                        <div>
+                            <label>
+                                <input type="checkbox" id="kitchen" name="kitchen" checked>
+                                <span id="kitchenLabel">Kitchen</span>
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" id="corridor" name="corridor" checked>
+                                <span id="corridorsLabel">Corridors</span>
+                            </label>
+                        </div>
+                    </div>
+                    <span class="dynamic-message" id="size-message-2" style="display: none;"></span>
+                    <div class="row" id="out-rooms">
+                        <div>
+                            <label>
+                                <input type="checkbox" id="balcony" name="balcony">
+                                <span id="balconyLabel">Balcony</span>
+                                <input type="number" id="balconySize" name="balconySize" data-lang-key="size" placeholder="Size (m²)">
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" id="garage" name="garage">
+                                <span id="garageLabel">Garage</span>
+                                <input type="number" id="garageSize" name="garageSize" data-lang-key="size" placeholder="Size (m²)">
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" id="basement" name="basement">
+                                <span id="basementLabel">Basement</span>
+                                <input type="number" id="basementSize" name="basementSize" data-lang-key="size" placeholder="Size (m²)">
+                            </label>
+                        </div>
+                    </div>
+                </div>                                 
             </section>
 
             <!-- Microservices -->
             <section id="microservices-section">
                 <span id="dynamic-message-1"></span>
-                <h2>MICROSERVICES</h2>
+                <h2 id="microservicesSectionTitle">MICROSERVICES</h2>
                 <div class="microservices" id="microservices">
-                    <label><input type="checkbox" name="microwave"> Microwave <span>PLN 20</span></label>
-                    <label><input type="checkbox" name="oven"> Oven <span>PLN 37</span></label>
-                    <label><input type="checkbox" name="washingDishes"> Washing Dishes <span>PLN 25</span></label>
-                    <label><input type="checkbox" name="kitchenCabinets"> Kitchen Cabinets <span>PLN 52</span></label>
-                    <label><input type="checkbox" name="refrigerator"> Refrigerator <span>PLN 40</span></label>
-                    <label><input type="checkbox" name="closet"> Closet <span>PLN 25</span></label>
-                    <label><input type="checkbox" name="windows"> Windows <span>PLN 40</span></label>
-                    <label><input type="checkbox" name="wardrobe"> Wardrobe <span>PLN 30</span></label>
-                    <label><input type="checkbox" name="bureau"> Bureau/Drawers <span>PLN 17</span></label>
-                    <label><input type="checkbox" name="toiletCabinets"> Toilet Cabinets <span>PLN 20</span></label>
-                    <label><input type="checkbox" name="additionalHours"> Additional Hours <span>PLN 48</span></label>
-                    <label><input type="checkbox" name="wateringPlants"> Watering Plants <span>PLN 12</span></label></label>
+                    <label><input type="checkbox" name="microwave"><span id="microwaveLabel">Microwave</span> <span>PLN 20</span></label>
+                    <label><input type="checkbox" name="oven"><span id="ovenLabel">Oven</span> <span>PLN 41</span></label>
+                    <label><input type="checkbox" name="washingDishes"><span id="washingDishesLabel">Washing Dishes</span> <span>PLN 25</span></label>
+                    <label><input type="checkbox" name="kitchenCabinets"><span id="kitchenCabinetsLabel">Kitchen Cabinets</span> <span>PLN 52</span></label>
+                    <label><input type="checkbox" name="refrigerator"><span id="refrigeratorLabel">Refrigerator</span> <span>PLN 40</span></label>
+                    <label><input type="checkbox" name="closet"><span id="closetLabel">Closet</span> <span>PLN 25</span></label>
+                    <label><input type="checkbox" name="wardrobe"><span id="wardrobeLabel">Wardrobe</span> <span>PLN 30</span></label>
+                    <label><input type="checkbox" name="bureau"><span id="bureauLabel">Bureau/Drawers</span> <span>PLN 17</span></label>
+                    <label><input type="checkbox" name="windows"><span id="windowsLabel">Windows</span> <span>PLN 35</span></label>
+                    <label><input type="checkbox" name="toiletCabinets"><span id="toiletCabinetsLabel">Toilet Cabinets</span> <span>PLN 20</span></label>
+                    <label><input type="checkbox" name="additionalHours"><span id="additionalHoursLabel">Additional Hours</span> <span>PLN 48</span></label>
+                    <label><input type="checkbox" name="wateringPlants"><span id="wateringPlantsLabel">Watering Plants</span> <span>PLN 12</span></label>
+                </div>
+            </section>
+
+            <!-- Windows -->
+            <section id="windows-section" style="display: none;">
+                <h4 id="windowsTitle">WINDOWS</h4>
+                <h5 id="windowsSubtitle">Enter the dimensions and number of windows</h5>
+                <div class="components" id="windows">
+                    <!-- Small Windows Counter -->
+                    <div>
+                        <button type="button" class="minus">-</button>
+                        <span id="smallWindowsLabel">SMALL</span>
+                        <input type="number" id="small-windows" name="small-windows" value="0" readonly>
+                        <button type="button" class="plus">+</button>
+                    </div>
+
+                    <!-- Medium Windows Counter -->
+                    <div>
+                        <button type="button" class="minus">-</button>
+                        <span id="mediumWindowsLabel">MEDIUM</span>
+                        <input type="number" id="medium-windows" name="medium-windows" value="0" readonly>
+                        <button type="button" class="plus">+</button>
+                    </div>
+
+                    <!-- Balcony Doors Counter -->
+                    <div>
+                        <button type="button" class="minus">-</button>
+                        <span id="balconyDoorsLabel">BALCONY DOORS</span>
+                        <input type="number" id="balcony-doors" name="balcony-doors" value="0" readonly>
+                        <button type="button" class="plus">+</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Order Cleaners -->
+            <section id="team-section" style="display: none;">
+                <h4 id="additionalHoursTitle">ADDITIONAL HOURS</h4>
+                <h5 id="additionalHoursSubtitle">Hire our team based on number and time</h5>
+                <div class="components" id="team">
+                    <!-- Cleaners Counter -->
+                    <div>
+                        <button type="button" class="minus">-</button>
+                        <span id="cleanersLabel">CLEANERS</span>
+                        <input type="number" id="cleaners" name="cleaners" value="0" readonly>
+                        <button type="button" class="plus">+</button>
+                    </div>
+
+                    <!-- Hours Counter -->
+                    <div>
+                        <button type="button" class="minus">-</button>
+                        <span id="hoursLabel">HOURS</span>
+                        <input type="number" id="hours" name="hours" value="0" readonly>
+                        <button type="button" class="plus">+</button>
+                    </div>
                 </div>
             </section>
 
             <!-- Additional Services -->
-            <section class="microservices" id="additionals">
-                <h2>ADDITIONAL</h2>
-                <div>
-                    <label><input type="checkbox" name="organicProducts" id="organicProducts"> Organic Products</label>
-                    <label><input type="checkbox" name="orderVacuum" id="orderVacuum"> Order Vacuum</label>
+            <section class="microservices">
+                <h2 id="additionalSectionTitle">ADDITIONAL</h2>
+                <div id="additionals">
+                    <label><input type="checkbox" name="organicProducts" id="organicProducts"> <span id="organicProductsLabel">Organic Products </span><span>PLN 79</span></label>
+                    <label><input type="checkbox" name="orderVacuum" id="orderVacuum"> <span id="orderVacuumLabel">Order Vacuum </span><span>PLN 38</span></label>
+                    <label><input type="checkbox" name="cleaningKit" id="cleaningKit"> <span id="cleaningKitLabel">Order Cleaning Kit </span><span>PLN 27</span></label>
+                    <label><input type="checkbox" name="ownKit" id="ownKit"> <span id="ownKitLabel">Prefer My Own Kit & Detergents </span><span>PLN 0</span></label>
                 </div>
             </section>
 
             <!-- Frequency -->
             <section>
-                <h2>FREQUENCY</h2>
+                <h2 id="frequencySectionTitle">FREQUENCY</h2>
                 <span id="motivation">Regular cleanings unlock greater discounts!</span>
                 <div class="container">
                     <div class="box">
-                        <label>Number of Visits:
+                        <label><span id="numberOfVisitsLabel">Number of Visits:</span>
                             <select id="frequencyCount">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -749,15 +951,15 @@
                                 <option value="7">7</option>
                             </select>
                         </label>
-                        <label>Per:
+                        <label><span id="perLabel">Per:</span>
                             <select id="frequencyPeriod">
-                                <option value="week">Week</option>
-                                <option value="month">Month</option>
+                                <option value="week" id="week">Week</option>
+                                <option value="month" id="month">Month</option>
                             </select>
                         </label>
                     </div>
                     <div class="box">
-                        <label>Date and Time:
+                        <label><span id="dateAndTimeLabel">Date and Time</span>
                             <input type="date" id="cleaningDate" required>
                             <input type="time" id="cleaningTime" required>
                         </label>
@@ -767,71 +969,90 @@
 
             <!-- Address -->
             <section class="details">
-                <h2>ADDRESS</h2>
+                <h2 id="addressSectionTitle">ADDRESS</h2>
                 <div class="address-inputs">
                     <label>
-                        City Name <br>
-                        <input type="text" name="city" placeholder="Warsaw" disabled>
+                        <span id="cityNameLabel">City Name</span> <br>
+                        <input type="text" name="city" data-lang-key="city" placeholder="Warsaw" disabled>
                     </label>
                     <label id="street">
-                        Street Name <br>
-                        <input type="text" name="street" placeholder="First Street" required>
+                        <span id="streetNameLabel">Street Name</span> <br>
+                        <input type="text" name="street" data-lang-key="streetsample" placeholder="First Street" required>
                     </label>
                     <label>
-                        Building # <br>
+                        <span id="buildingNumberLabel">Building #</span> <br>
                         <input type="text" name="buildingNumber" placeholder="01" required>
                     </label>
                     <label>
-                        Apartment # <br>
+                        <span id="apartmentNumberLabel">Apartment #</span> <br>
                         <input type="text" name="apartmentNumber" placeholder="01" required>
                     </label>
                     <label>
-                        Postal Code <br>
+                        <span id="postalCodeLabel">Postal Code</span> <br>
                         <input type="text" name="postalCode" placeholder="01-001" required>
                     </label>
                 </div>
 
-                <div class="entrance-toggle">
-                    <label>
-                        <input type="checkbox" id="meetAtEntrance">
-                        Meet at the entrance
+                <div id="entrance">
+                    <label for="entry-method">
+                        <span id="entryMethodLabel">How can we enter your home?</span>
                     </label>
+                    <select id="entry-method" name="entry-method">
+                        <option value="codes-provided" id="codesProvidedOption">Can provide access codes</option>
+                        <option value="meet-at-entrance" id="meetAtEntranceOption">Meet at entrance</option>
+                        <option value="someone-home" id="someoneHomeOption">Someone will be at home</option>
+                        <option value="neighbour" id="neighbourOption">Keys with neighbour</option>
+                        <option value="different-address" id="differentAddressOption">Pick up keys different address</option>
+                        <option value="return-keys" id="returnKeysOption">Pick up and return keys</option>
+                        <option value="hidden-keys" id="hiddenKeysOption">Keys hidden</option>
+                        <option value="other" id="otherOption">Other way of delivery</option>
+                    </select>
                 </div>
             
                 <div id="codes-section">
                     <label>
-                        Gate Code <br>
+                        <span id="gateCodeLabel">Gate Code</span> <br>
                         <input type="text" name="gateCode" placeholder="01 Key 0985 Bell">
                     </label>
                     <label>
-                        Entrance Code <br>
+                        <span id="entranceCodeLabel">Entrance Code</span> <br>
                         <input type="text" name="entranceCode" placeholder="Key 0985 Bell">
                     </label>
                     <label>
-                        Apartment Code <br>
+                        <span id="apartmentCodeLabel">Apartment Code</span> <br>
                         <input type="text" name="apartmentCode" placeholder="Bell 0202">
                     </label>
+                </div>
+    
+                <div id="access" style="display: none;">
+                    <label>
+                        <span id="additionalInfoLabel">Additional Information</span> <br>
+                    </label>
+                    <textarea name="accessInfo" data-lang-key="accessInfo" placeholder="Provide more infomation..."></textarea>
                 </div>
             </section>
 
             <!-- Contact -->
             <section class="details">
-                <h2>CONTACT DETAILS</h2>
+                <h2 id="contactDetailsSectionTitle">CONTACT DETAILS</h2>
                 <span id="phoneValidationMsg" style="display: none;"></span>
                 <div id="personal">
-                    <label>Full Name<br><input type="text" name="name" placeholder="John Doe"></label>
+                    <label><span id = "fullNameLabel">Full Name</span><br><input type="text" name="name" data-lang-key="name" placeholder="John Doe"></label>
                     <div id="phone">
-                        <label for="telephone">Phone Number</label>
+                        <label for="telephone"><span id = "phoneNumberLabel">Phone Number</span></label>
                         <div>
                             <input type="text" id="countryCode" name="countryCode" placeholder="+1" maxlength="4">
-                            <input type="tel" id="telephone" name="telephone" placeholder="Enter phone number">
+                            <input type="tel" id="telephone" name="telephone" data-lang-key="telephone" placeholder="555 555 555">
                         </div>
                     </div>
-                    <label>Email <br><input type="email" name="email" placeholder="johndoe@gmail.com"></label>
+                    <label>Email <br><input type="email" name="email" data-lang-key="email" placeholder="johndoe@gmail.com"></label>
                 </div>
                 <div class="textarea-container">
                     <label id="add-text">Additional Information <br></label>
-                    <textarea name="additionalInfo" placeholder="Contact me using WhatsApp/Telegram/Viber e.t.c"></textarea>
+                    <textarea name="additionalInfo" data-lang-key="additionalInfo"
+                        placeholder="Contact me using WhatsApp/Telegram/Viber. 
+Don't not clean the pressure cooker. 
+The door need a littlebit of 'pulling' tactic to unclock it. e.t.c"></textarea>
                 </div>
             </section>
 
@@ -839,36 +1060,40 @@
 
             <!-- Payment Method -->
             <section class="payment-method">
-                <h2>SELECT PAYMENT METHOD</h2>
+                <h2 id="select-payment">SELECT PAYMENT METHOD</h2>
                 <span class="dynamic-message" id="dynamic-message-2"></span>
                 <div class="lab">
-                    <label><input type="radio" name="paymentMethod" value="cash" required> Cash</label>
-                    <label><input type="radio" name="paymentMethod" value="card"> Card/Apple Pay/Google Pay</label>
-                    <label><input type="radio" name="paymentMethod" value="blik"> BLIK</label>
+                    <label><input type="radio" name="paymentMethod" value="cash" required><span id="cash">Cash</span></label>
+                    <label><input type="radio" name="paymentMethod" value="card"><span id="card">Card/Apple Pay/Google Pay</span></label>
+                    <label><input type="radio" name="paymentMethod" value="blik"><span id="blik">BLIK</span></label>
                 </div>
             </section>            
 
             <!-- Agreement -->
             <section id="consent">
                 <span class="dynamic-message" id="dynamic-message-3"></span>
-                <br>
-                <label>
-                    <input type="checkbox" id="terms" name="terms" required>
-                    By placing an order I agree with the <a href="https://sites.google.com/d/1nGXQAC1IAmUwe-uwr1G8VJfQEkbSRF5o/p/1QDFcM0sFoTlqg3Sh7j_2l0CDMVZiL7GH/edit">Public offer agreement</a> and <a href="https://sites.google.com/d/1nGXQAC1IAmUwe-uwr1G8VJfQEkbSRF5o/p/1mThmvE23s7yRkBd_kQojdPyjzhFYvOte/edit">Privacy Policy</a>.
-                  <br>
-                </label>
-                <label>
-                    <input type="checkbox" name="marketingConsent">
-                    I consent to the processing of my personal data for marketing purposes by the administrator.
-                </label>
-                <br>
+                <div>
+                    <label>
+                        <input type="checkbox" name="terms" required>
+                        <span id="terms-en"><span>By placing an order I agree with the</span><a href="https://sites.google.com/d/1nGXQAC1IAmUwe-uwr1G8VJfQEkbSRF5o/p/1QDFcM0sFoTlqg3Sh7j_2l0CDMVZiL7GH/edit"> Public offer agreement</a> and <a href="https://sites.google.com/d/1nGXQAC1IAmUwe-uwr1G8VJfQEkbSRF5o/p/1mThmvE23s7yRkBd_kQojdPyjzhFYvOte/edit">Privacy Policy</a>.</span>
+                        <span id="terms-ru" style="display: none;"><span>Размещая заказ, я соглашаюсь с</span><a href="https://sites.google.com/d/1nGXQAC1IAmUwe-uwr1G8VJfQEkbSRF5o/p/1QDFcM0sFoTlqg3Sh7j_2l0CDMVZiL7GH/edit"> Договором публичной оферты</a> и <a href="https://sites.google.com/d/1nGXQAC1IAmUwe-uwr1G8VJfQEkbSRF5o/p/1mThmvE23s7yRkBd_kQojdPyjzhFYvOte/edit">Политикой конфиденциальности</a>.</span>
+                        <span id="terms-pl" style="display: none;"><span>Składając zamówienie, wyrażam zgodę na</span><a href="https://sites.google.com/d/1nGXQAC1IAmUwe-uwr1G8VJfQEkbSRF5o/p/1QDFcM0sFoTlqg3Sh7j_2l0CDMVZiL7GH/edit"> Umowę o świadczenie usług</a> oraz <a href="https://sites.google.com/d/1nGXQAC1IAmUwe-uwr1G8VJfQEkbSRF5o/p/1mThmvE23s7yRkBd_kQojdPyjzhFYvOte/edit">Politykę prywatności</a>.</span>
+                        <br>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" name="marketingConsent">
+                        <span id="marketingConsent">I consent to the processing of my personal data for marketing purposes by the administrator.</span>
+                    </label>
+                </div>
             </section>
 
             <!-- Order Button -->
             <section id="placingOrder">
                 <span class="dynamic-message" id="threshold-message"></span>
                 <div>
-                    <button type="submit" id="makeOrder" disabled>MAKE ORDER FOR PLN <a id="pay-amount"></a></button>
+                    <button type="submit" id="makeOrder" disabled><span id="orderButton">MAKE ORDER FOR PLN </span><a id="pay-amount"></a></button>
                 </div>
             </section>
         </form>
@@ -876,62 +1101,62 @@
         <!-- Aside Summary Section -->
         <aside>
           <div id="summary-card">
-            <h2>Summary</h2>
+            <h2 id="h2-summary">SUMMARY</h2>
               <div id="orders">
                 <div class="summary-item">
-                    <span>Rooms:</span>
+                    <span id="summary-rooms">Rooms:</span>
                     <span id="summaryRooms">1</span>
                 </div>
                 <div class="summary-item">
-                    <span>Bathrooms:</span>
+                    <span id="summary-bathrooms">Bathrooms:</span>
                     <span id="summaryBathrooms">1</span>
                 </div>
                 <div class="summary-item">
-                    <span>Kitchen:</span>
-                    <span id="summaryKitchen">Yes</span>
+                    <span id="summary-kitchen">Kitchen:</span>
+                    <span id="summaryKitchen">✔</span>
                 </div>
                 <div class="summary-item">
-                  <span>Corridors:</span>
-                  <span id="summaryCorridor">Yes</span>
+                  <span id="summary-corridor">Corridors:</span>
+                  <span id="summaryCorridor">✔</span>
                 </div>
                 <div class="summary-item">
-                  <span>Balcony:</span>
-                  <span id="summaryBalcony">No</span>
+                  <span id="summary-balcony">Balcony:</span>
+                  <span id="summaryBalcony">✖</span>
                 </div>
                 <div class="summary-item">
-                  <span>Garage:</span>
-                  <span id="summaryGarage">No</span>
+                  <span id="summary-garage">Garage:</span>
+                  <span id="summaryGarage">✖</span>
                 </div>
                 <div class="summary-item">
-                  <span>Basement:</span>
-                  <span id="summaryBasement">No</span>
+                  <span id="summary-basement">Basement:</span>
+                  <span id="summaryBasement">✖</span>
                 </div>
                 <div class="summary-item">
-                  <span>Private House:</span>
-                  <span id="summaryPrivateHouse">No</span>
+                  <span id="summaryApartmentType">Private House:</span>
+                  <span id="summaryPrivateHouse">✖</span>
                 </div>
                 <div class="summary-item">
-                  <span>Trash Bins:</span>
-                  <span id="summaryBins">Yes</span>
+                  <span id="summary-bins">Trash Bins:</span>
+                  <span id="summaryBins">✔</span>
                 </div>
                 <div class="summary-item">
-                  <span>Frequency:</span>
+                  <span id="summary-frequency">Frequency:</span>
                   <span id="summaryFrequency">1</span>
                 </div>
             </div>
             <div id="calculations">
                 <hr>
                 <div class="calculation-item">
-                    <span >Total Price</span>
+                    <span id="summary-total">Total Price</span>
                     <span><span id="total">0.00</span> PLN</span>
                 </div>
                 <div class="calculation-item">
-                    <span>Discount</span>
+                    <span id="summary-discount">Discount</span>
                     <span><span id="discount">0.00</span> PLN</span>
                 </div>
                 <hr>
                 <div class="calculation-item" id="total-to-pay">
-                    <span>To Pay</span>
+                    <span id="summary-to-pay">To Pay</span>
                     <span><span id="to-pay">0.00</span> PLN</span>
                 </div>
             </div>
@@ -958,7 +1183,7 @@
                 },
                 bathroomCosts: {
                     regular: 25.15,
-                    deep: 37.45,
+                    deep: 39.45,
                     custom: 25.85,
                     postRenovation: 38.55 
                 },
@@ -990,19 +1215,31 @@
                 },
                 microservicePrices: {
                     microwave: 20,
-                    oven: 37,
+                    oven: 41,
                     washingDishes: 25,
                     kitchenCabinets: 52,
                     refrigerator: 40,
                     closet: 25,
-                    windows: 40,
+                    windows: {
+                        small: 20,
+                        medium: 35,
+                        balconyDoors: 48
+                    },
                     wardrobe: 30,
                     bureau: 17,
                     toiletCabinets: 20,
                     additionalHours: 48,
                     wateringPlants: 12,
-                    organicProducts: 59,
-                    orderVacuum: 28
+                    organicProducts: 79,
+                    orderVacuum: 38,
+                    cleaningKit: 27,
+                    ownKit: 0
+                },
+                apartmentRates: {
+                    privateHouse: 1.24,
+                    studioApartment: 9.50,
+                    privateApartment: 1.02,
+                    commercialApartment: 1.10
                 },
                 discountRates: {
                     2: 0.05,
@@ -1028,6 +1265,30 @@
                 }
             };
 
+            const warningTranslations = {
+                en: {
+                    postRenovationThresholdMessage: (threshold) => `**You need to go above PLN ${threshold} total under this custom/post-renovation option for order to be accepted!**`
+                },
+                ru: {
+                    postRenovationThresholdMessage: (threshold) => `**Вам нужно превысить PLN ${threshold} в общей сложности при выборе этой опции (индивидуальная/после ремонта), чтобы заказ был принят!**`
+                },
+                pl: {
+                    postRenovationThresholdMessage: (threshold) => `**Musisz przekroczyć PLN ${threshold} w sumie przy wyborze tej opcji (indywidualna/po remoncie), aby zamówienie zostało przyjęte!**`
+                }
+            };
+
+            const technicalTranslations = {
+                en: {
+                    technicalMaintenanceMessage: "Technical maintenance in process, choose other payment option."
+                },
+                ru: {
+                    technicalMaintenanceMessage: "Техническое обслуживание в процессе, выберите другой способ оплаты."
+                },
+                pl: {
+                    technicalMaintenanceMessage: "Trwają prace techniczne, wybierz inną opcję płatności."
+                }
+            };
+
             // Utility Functions
             const $ = selector => document.querySelector(selector);
             const $$ = selector => document.querySelectorAll(selector);
@@ -1039,7 +1300,9 @@
                 const cleaningType = $("input[name='cleaningType']:checked").value; // Get the selected cleaning type
 
                 // Determine the minimum value based on the cleaning type
-                const minValue = (cleaningType === 'regular' || cleaningType === 'deep') ? 1 : 0;
+                const minValue = (elementId === 'rooms' || elementId === 'bathrooms') 
+                    ? (cleaningType === 'regular' || cleaningType === 'deep') ? 1 : 0 
+                    : 0; // Default to 0 for other counters
 
                 let currentValue = parseInt(input.value) || 0; // Ensure currentValue is a number
                 // Calculate new value, ensuring it does not go below minValue
@@ -1048,6 +1311,19 @@
                 // const newValue = Math.max(0, currentValue + delta); // Allow zero for custom cleaning
                 input.value = newValue;
                 updateSummary();
+            }
+            
+            // Function to handle increment and decrement
+            function handleCounter(button, input, step = 1) {
+                button.addEventListener("click", function () {
+                let currentValue = parseInt(input.value, 10);
+                if (button.classList.contains("minus")) {
+                    currentValue = Math.max(0, currentValue - step); // Ensure value doesn't go below 1
+                } else if (button.classList.contains("plus")) {
+                    currentValue += step;
+                }
+                    input.value = currentValue;
+                });
             }
 
             // Reset Form for Custom and Post-Renovation Cleaning
@@ -1062,8 +1338,9 @@
                 $('#summaryCorridor').textContent = 'No';
                 
                 // Do not call updateSummary() here to avoid infinite recursion
-                const userMessage = `**You need to go above PLN ${CONFIG.thresholds.postRenovation} total under this custom/post-renovation option for order to be accepted!**`;
-
+                const currentLang = document.documentElement.lang;
+                const threshold = CONFIG.thresholds.postRenovation; // Get the threshold from config
+                const userMessage = warningTranslations[currentLang].postRenovationThresholdMessage(threshold);
                 const messageElement = $('#dynamic-message-0');
 
                 // Set the message in the HTML element
@@ -1202,10 +1479,52 @@
             // Microservices Price Calculation
             function calculateMicroservicesCost() {
                 let total = 0;
+
+                // Iterate over all checked checkboxes in the microservices section
                 $$('.microservices input[type="checkbox"]:checked').forEach(checkbox => {
-                    total += CONFIG.microservicePrices[checkbox.name] || 0;
+                    
+                    // Handle Windows checkbox
+                    if (checkbox.name === "windows" && checkbox.checked) {
+                        // Call the function to calculate windows cost
+                        const windowsCost = calculateWindowsCost();
+                        total += windowsCost;
+                    }   // Handle Additional Hours checkbox
+                    else if (checkbox.name === "additionalHours" && checkbox.checked) {
+                        // Call the function to calculate additional hours cost
+                        const additionalHoursCost = calculateAdditionalHoursCost();
+                        total += additionalHoursCost;
+                    }
+                    else {
+                        // Add the base price of the microservice
+                        total += CONFIG.microservicePrices[checkbox.name] || 0;
+                    }
                 });
+
                 return total;
+            }
+
+            // Example functions for calculating windows and additional hours costs
+            function calculateWindowsCost() {
+                // Logic to calculate the cost of windows
+                const smallWindows = parseInt($("#small-windows").value) || 0;
+                const mediumWindows = parseInt($("#medium-windows").value) || 0;
+                const balconyDoors = parseInt($("#balcony-doors").value) || 0;
+
+                const smallWindowPrice = CONFIG.microservicePrices.windows.small || 0;
+                const mediumWindowPrice = CONFIG.microservicePrices.windows.medium || 0;
+                const balconyDoorPrice = CONFIG.microservicePrices.windows.balconyDoors || 0;
+
+                return (smallWindows * smallWindowPrice) + (mediumWindows * mediumWindowPrice) + (balconyDoors * balconyDoorPrice);
+            }
+
+            function calculateAdditionalHoursCost() {
+                // Logic to calculate the cost of additional hours
+                const cleaners = parseInt($("#cleaners").value) || 0;
+                const hours = parseInt($("#hours").value) || 0;
+
+                const cleanerHourlyRate = CONFIG.microservicePrices.additionalHours || 0;
+
+                return cleaners * hours * cleanerHourlyRate;
             }
 
             // Frequency Discount Calculation
@@ -1268,12 +1587,12 @@
 
                 totalPrice = applyFrequencyDiscount(totalPrice);
                 
-                return totalPrice || 0; // Ensure totalPrice is never NaN
+                return totalPrice || 0; 
             }
 
             function validateCountersAndCalculate() {
-                const rooms = parseInt($('#rooms').value) || 0; // Get rooms value, default to 0 if empty
-                const bathrooms = parseInt($('#bathrooms').value) || 0; // Get bathrooms value, default to 0 if empty
+                const rooms = parseInt($('#rooms').value) || 0; 
+                const bathrooms = parseInt($('#bathrooms').value) || 0; 
             
                 // If rooms or bathrooms are below 1, set them to 1 and tick the kitchen box
                 if (rooms < 1 || bathrooms < 1) {
@@ -1283,20 +1602,20 @@
                     $('#summaryBathrooms').textContent = '1';
                 }
                 
-                $('#kitchen').checked = true; // Tick the kitchen box
+                $('#kitchen').checked = true;
                 $('#corridor').checked = true;
 
                 // Get the selected cleaning type
                 const cleaningType = $('input[name="cleaningType"]:checked').value;
             
                 // Calculate total price
-                const basePrice = CONFIG.baseRates[cleaningType] || 0; // Base price for the selected cleaning type
-                const roomCharge = CONFIG.additionalRoomCosts[cleaningType] || 0; // Charge per additional room
-                const bathroomCharge = CONFIG.bathroomCosts[cleaningType] || 0; // Charge per additional bathroom
+                const basePrice = CONFIG.baseRates[cleaningType] || 0; 
+                const roomCharge = CONFIG.additionalRoomCosts[cleaningType] || 0; 
+                const bathroomCharge = CONFIG.bathroomCosts[cleaningType] || 0; 
             
                 // Calculate total price
-                const totalRooms = parseInt($('#rooms').value) || 1; // Total rooms, default to 1 if empty
-                const totalBathrooms = parseInt($('#bathrooms').value) || 1; // Total bathrooms, default to 1 if empty
+                const totalRooms = parseInt($('#rooms').value) || 1; 
+                const totalBathrooms = parseInt($('#bathrooms').value) || 1;
                 
                 //Calculating price from balcony, garage or bassement.
                 const extraSpaceCosts = calculateAdditionalCosts();
@@ -1319,14 +1638,26 @@
                 // Apply 24% tax for Legal Entity
                 const isLegalEntity = $('input[name="userType"]:checked').value === 'legalEntity';
                 if (isLegalEntity) {
-                    amount *= 1.24; // Add 24% tax
+                    amount *= 1.24; 
                 }
-
+                
+                const aptType = $('input[name="apartmentType"]:checked').value;
                 // Apply 24% multiplier for Private House
-                if ($('#privateHouse').checked) {
-                    amount *= 1.24; // Add 24% multiplier
+                if (aptType === 'Private House') {
+                    amount *= CONFIG.apartmentRates.privateHouse; 
                 }
 
+                if (aptType === 'Studio Apartment') {
+                    amount -= CONFIG.apartmentRates.studioApartment;
+                }
+
+                if (aptType === 'Private Apartment') {
+                    amount *= CONFIG.apartmentRates.privateApartment;
+                }
+
+                if (aptType === 'Commercial Apartment') {
+                    amount *= CONFIG.apartmentRates.commercialApartment;
+                }
                 return amount;
             }
 
@@ -1334,13 +1665,16 @@
             function updateSummary() {
                 $('#summaryRooms').textContent = $('#rooms').value || 1; // Default to 1 if empty
                 $('#summaryBathrooms').textContent = $('#bathrooms').value || 1; // Default to 1 if empty
-                $('#summaryKitchen').textContent = $('#kitchen').checked ? 'Yes' : 'No';
-                $('#summaryCorridor').textContent = $('#corridor').checked ? 'Yes' : 'No';
-                $('#summaryBalcony').textContent = $('#balcony').checked ? 'Yes' : 'No';
-                $('#summaryGarage').textContent = $('#garage').checked ? 'Yes' : 'No';
-                $('#summaryBasement').textContent = $('#basement').checked ? 'Yes' : 'No';
-                $('#summaryPrivateHouse').textContent = $('#privateHouse').checked ? 'Yes' : 'No';
+                $('#summaryKitchen').textContent = $('#kitchen').checked ? '✔' : '✖';
+                $('#summaryCorridor').textContent = $('#corridor').checked ? '✔' : '✖';
+                $('#summaryBalcony').textContent = $('#balcony').checked ? '✔' : '✖';
+                $('#summaryGarage').textContent = $('#garage').checked ? '✔' : '✖';
+                $('#summaryBasement').textContent = $('#basement').checked ? '✔' : '✖';
 
+                if ($('input[name="cleaningType"]:checked')) {
+                    $('#summaryApartmentType').textContent = $('input[name="apartmentType"]:checked').value;
+                    $('#summaryPrivateHouse').textContent = '✔';
+                }
                 const totalPrice = calculateTotalPrice();
                 $('#to-pay').textContent = `${totalPrice.toFixed(2)}`;
                 $('#pay-amount').textContent = `${totalPrice.toFixed(2)}`;
@@ -1351,7 +1685,7 @@
 
             // Update Bill On Summary Section
             function updateList(amount) {
-                $('#summaryKitchen').textContent = $('#kitchen').checked ? 'Yes' : 'No';
+                $('#summaryKitchen').textContent = $('#kitchen').checked ? '✔' : '✖';
 
                 const bill = amount;
                 $('#to-pay').textContent = `${bill.toFixed(2)}`;
@@ -1359,13 +1693,6 @@
                 
                 toggleOrderButton();
                 handlePaymentMethodSelection(); // Check payment method selection status.
-            }
-
-            // Toggle Code Inputs based on "Meet at Entrance"
-            function toggleCodeInputs() {
-                const meetAtEntranceChecked = $('#meetAtEntrance').checked;
-                const codesSection = $('#codes-section');
-                codesSection.style.display = meetAtEntranceChecked ? 'none' : 'flex';
             }
             
             // Handle Payment Method Selection Logic
@@ -1380,11 +1707,12 @@
                             messageElement.style.opacity = '1';
 
                             // Clear previous messages
-                            messageElement.textContent = "Technical maintenance in process, choose other payment option.";
+                            const currentLang = document.documentElement.lang;
+                            messageElement.textContent = technicalTranslations[currentLang].technicalMaintenanceMessage;
                             
                             // Show alert only if it hasn't been shown for this selection
                             if (!method.dataset.alertShown) {
-                                alert("Maintenance in process, choose other payment option.");
+                                alert(technicalTranslations[currentLang].technicalMaintenanceMessage);
                                 method.dataset.alertShown = true; // Set flag to prevent multiple alerts
                             }
                         } else {
@@ -1548,23 +1876,28 @@
                 }
             }
 
+            function getMainRooms() {
+                const rooms = $('#rooms').value;
+                const bathrooms = $('#bathrooms').value;
+
+                return `rooms X${rooms}, bathrooms X${bathrooms}`;
+            }
+
             function getAddressData() {
                 let street = $("input[name='street']").value.trim(); 
                 let building = $("input[name='buildingNumber']").value.trim();
                 let apartment = $("input[name='apartmentNumber']").value.trim();
                 let postal = $("input[name='postalCode']").value.trim();
-                const meetAtEntrance = $('#meetAtEntrance').checked;
+                let accessInfo = $('#entry-method').value;
 
                 let fullAddress = `${street}, ${building}, ${apartment}, ${postal}`;
 
-                if(!meetAtEntrance) {
+                if(accessInfo === 'Can provide access codes') {
                     let gatecode = $("input[name='gateCode']").value.trim();
                     let entrancecode = $("input[name='entranceCode']").value.trim();
                     let apartmentcode = $("input[name='apartmentCode']").value.trim();
                     fullAddress += ` - G: ${gatecode} | E: ${entrancecode} | A: ${apartmentcode}`;
 
-                } else {
-                    fullAddress += ` - Meet at entrance`;
                 }
 
                 return fullAddress;
@@ -1578,6 +1911,9 @@
                     let roomName = room.name; // Get the name of the room
                     let sizeInput = $("#" + roomName + "Size"); // Find the associated size input
 
+                    if (roomName == "kitchen") {
+                        extraRoomsData.push(`${roomName}`);
+                    }
                     if (sizeInput && sizeInput.value) {
                         extraRoomsData.push(`${roomName} ${sizeInput.value}`);
                     }
@@ -1595,7 +1931,26 @@
 
                 microservices.forEach(service => {
                     let serviceName = service.name; 
-                    microservicesData.push(`${serviceName}`);
+
+                    if(serviceName === 'windows') {
+                        const smallWindows = parseInt($("#small-windows").value) || 0;
+                        const mediumWindows = parseInt($("#medium-windows").value) || 0;
+                        const balconyDoors = parseInt($("#balcony-doors").value) || 0;
+
+                        // Add window counts to the array if they are greater than 0
+                        if (smallWindows > 0) microservicesData.push(`small-windows X${smallWindows}`);
+                        if (mediumWindows > 0) microservicesData.push(`medium-windows X${mediumWindows}`);
+                        if (balconyDoors > 0) microservicesData.push(`balcony-doors X${balconyDoors}`);
+                    }
+                    else if (serviceName === 'additionalHours') {
+                        const cleaners = parseInt($("#cleaners").value) || 0;
+                        const hours = parseInt($("#hours").value) || 0;
+
+                        if (cleaners > 0 && hours > 0) microservicesData.push(`cleaners X${cleaners} - ${hours}hrs`);
+                    }
+                    else {
+                        microservicesData.push(`${serviceName}`);
+                    }
                 });
 
                 return microservicesData;
@@ -1630,6 +1985,20 @@
                 const phone = $('#telephone').value.trim();
                 let completeNumber = `(${countryCode})${phone}`;
                 return completeNumber;
+            }
+
+            function getCleaningScale() {
+                let cleaningType = $('input[name="cleaningType"]:checked').value;
+                let housingType = $('input[name="apartmentType"]:checked').value;
+                return `${cleaningType} - ${housingType}`;
+            }
+
+            function getAdditionalInfo() {
+                let entryMethod = $('#entry-method').value;
+                let accessInfo = $('textarea[name="accessInfo"]').value;
+                let additionalInfo = $('textarea[name="additionalInfo"]').value
+
+                return `${entryMethod} 1. ${accessInfo} 2. ${additionalInfo}`;
             }
 
             function validatePhoneNumber() {
@@ -1680,25 +2049,126 @@
                 form.classList.remove('loading'); 
             }
 
+            function loadLanguage(lang) {
+            // Define the path to the language files
+            const langFilePath = `./locales/${lang}.json`;
+
+            // Fetch the selected language file
+            fetch(langFilePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Language file not found: ${langFilePath}`);
+                    }
+                    return response.json();
+                })
+                .then(translations => {
+                    // Update the UI with the translated strings
+                    applyTranslations(translations, lang);
+                })
+                .catch(error => {
+                    console.error("Error loading language file:", error);
+                    // Fallback to English if the selected language file fails to load
+                    fetch('./locales/en.json')
+                        .then(response => response.json())
+                        .then(translations => {
+                            applyTranslations(translations);
+                        })
+                        .catch(fallbackError => {
+                            console.error("Error loading fallback language file:", fallbackError);
+                        });
+                    });
+            }
+
+            function applyTranslations(translations, lang) {
+                // Iterate over all keys in the translations object
+                for (const key in translations) {
+                    if (translations.hasOwnProperty(key)) {
+                    // Handle elements with matching IDs (for text content)
+                    const elementsById = document.querySelectorAll(`[id="${key}"]`);
+                    elementsById.forEach(element => {
+                        element.innerText = translations[key];
+                    });
+
+                    // Handle elements with matching data-lang-key attributes (for placeholders)
+                    const elementsByDataKey = document.querySelectorAll(`[data-lang-key="${key}"]`);
+                    elementsByDataKey.forEach(element => {
+                        if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
+                        // Update placeholder for input/textarea elements
+                        element.placeholder = translations[key];
+                        } else {
+                        // Update inner text for other elements
+                        element.innerText = translations[key];
+                        }
+                    });
+                    }
+                }
+
+                // Update the language attribute of the document
+                let previousLanguage = document.documentElement.lang;
+                document.documentElement.lang = lang;
+
+                // Handle terms visibility (if applicable)
+                $(`#terms-${previousLanguage}`).style.display = "none";
+                $(`#terms-${lang}`).style.display = "block";
+            }
+
             // Event Listeners Setup Function
             function setupEventListeners() {
                 // Counter Buttons for Rooms and Bathrooms
-            $$('.apartment .minus, .apartment .plus').forEach(button => {
+                $$('.components .minus, .components .plus').forEach(button => {
                     button.addEventListener('click', (e) => {
-                        const elementId = e.target.closest('.apartment').querySelector('input[type="number"]').id;
+                        const inputElement = e.target.closest('div').querySelector('input[type="number"]');
                         const delta = button.classList.contains('minus') ? -1 : 1;
-                        adjustCounter(elementId, delta);
+                        adjustCounter(inputElement.id, delta);
                     });
                 });
-
+                
                 // Attach event listeners to Kitchen and Corridors checkboxes
                 $('#kitchen').addEventListener('change', handleCheckboxChange);
                 $('#corridor').addEventListener('change', handleCheckboxChange);
 
                 // Checkboxes and Radios
-                $$('input[type="checkbox"], input[type="radio"]').forEach(input => {
+                $$('input[type="checkbox"]:not([name="windows"]):not([name="additionalHours"]), input[type="radio"]').forEach(input => {
                     input.addEventListener('change', updateSummary);
                     input.addEventListener('change', toggleOrderButton); // Update button state on change
+                });
+
+                // Dedicated event listeners for Windows and Additional Hours checkboxes
+                const windowsCheckbox = $('input[name="windows"]');
+                const additionalHoursCheckbox = $('input[name="additionalHours"]');
+                const windowsSection = $("#windows-section");
+                const teamSection = $("#team-section");
+
+                // Toggle windows section visibility
+                windowsCheckbox.addEventListener("change", function () {
+                    if (windowsCheckbox.checked) {
+                        windowsSection.style.display = "block";
+                    } else {
+                        windowsSection.style.display = "none";
+                    }
+                });
+
+                // Toggle team section visibility
+                additionalHoursCheckbox.addEventListener("change", function () {
+                    if (additionalHoursCheckbox.checked) {
+                        teamSection.style.display = "block";
+                    } else {
+                        teamSection.style.display = "none";
+                    }
+                });
+
+                $('#entry-method').addEventListener('change', function() {
+                    const selectedValue = this.value;
+                    const codesSection = $('#codes-section');
+                    const textareaContainer = $('#access');
+
+                    if (selectedValue === 'codes-provided') {
+                        textareaContainer.style.display = 'none';
+                        codesSection.style.display = 'block';
+                    } else {
+                        textareaContainer.style.display = 'block';
+                        codesSection.style.display = 'none';
+                    }
                 });
 
                 // Cleaning Type Change Event Listener
@@ -1726,12 +2196,18 @@
                     input.addEventListener('change', updateSummary); // Update summary when user type changes
                 });
 
-                // Private House Toggle Event Listener
-                $('#privateHouse').addEventListener('change', updateSummary);
+                // Cleaning Type Change Event Listener
+                $$('input[name="apartmentType"]').forEach(input => {
+                    input.addEventListener('change', updateSummary); // Update summary when apartment type changes
+                });
 
                 // Frequency Dropdown Event Listener
                 $('#frequencyCount').addEventListener('change', updateSummary);
                 $('#frequencyPeriod').addEventListener('change', updateSummary);
+
+                $('#langSwitcher').addEventListener('change', function() {
+                    loadLanguage(this.value);
+                });
 
                 // Form Submission Handling
                 $('#cleaning-order-form').addEventListener('submit', (e) => {
@@ -1740,6 +2216,7 @@
 
                         showLoading();
                         
+                        let mainRooms = getMainRooms();
                         let microservicesData = getMicroservicesData();
                         let additionalsData = getAdditonalsData();
                         let selectedExtraRooms = getExtraRoomsData();
@@ -1748,6 +2225,8 @@
                         let addressData = getAddressData();
                         let totalBilling = calculateTotalPrice();
                         let phoneNumber = getPhoneNumber();
+                        let cleaningScale = getCleaningScale();
+                        let additionalInfo = getAdditionalInfo();
                         
                         var formData = {
                             address: addressData,
@@ -1755,10 +2234,8 @@
                             name: $('input[name="name"]').value,
                             telephone: phoneNumber,
                             email: $('input[name="email"]').value,
-                            cleaningType: $('input[name="cleaningType"]:checked').value,
-                            rooms: $('#rooms').value,
-                            bathrooms: $('#bathrooms').value,
-                            kitchen: $('#kitchen').checked ? "Yes" : "No",
+                            cleaningType: cleaningScale,
+                            mainrooms: mainRooms,
                             extrarooms: selectedExtraRooms.join(", "), 
                             microservices: microservicesData.join(", "),
                             additionalservices: additionalsData.join(", "),
@@ -1766,10 +2243,10 @@
                             date: dateTime,
                             paymentOption: $('input[name="paymentMethod"]:checked').value,
                             totalPrice: totalBilling.toFixed(2),
-                            additionalInfo : $('textarea[name="additionalInfo"]').value,
+                            additionalInfo : additionalInfo,
                         };
 
-                        fetch("https://script.google.com/macros/s/AKfycbzEywAgpmst9Rnb1W8rWhx2NwcTVWv4udVKhZJ0sBXSnl4XP7L4mUxaWaULmvzWccUx/exec", {
+                        fetch("https://script.google.com/macros/s/AKfycby2jrvlADLNr489chR5Hzd0uoL2R1IoECxFV9Xptr3bxzTEr43HRNEIScCuFg_DNMeD/exec", {
                             method: "POST",
                             mode: "no-cors",
                             headers: {
@@ -1798,9 +2275,6 @@
                         });
                     }
                 });
-                
-                // Meet at Entrance Toggle Event Listener
-                $('#meetAtEntrance').addEventListener('change', toggleCodeInputs);
             }
 
             // Enable size input when checkbox is checked
