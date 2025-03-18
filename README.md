@@ -2,7 +2,7 @@
 An app for calculating and building cleaning package bills as per user customization.
 A web application for creating customized cleaning service packages and generating bills.
 
-##Description
+# Description
 This application allows users to create custom cleaning service packages by selecting from various options and specifying quantities or details.  It dynamically calculates the total cost based on the user's selections. It is intended to simplify the quoting and billing of cleaning services for service providers and clients.
 
 # Key Features
